@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SimpleDic.Data;
+using SimpleDic.Models;
 
 namespace SimpleDic.Controllers
 {
@@ -18,6 +19,18 @@ namespace SimpleDic.Controllers
         {
             var model = _db.dictionaries;
             return View(model);
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Dictionary dic)
+        {
+            _db.dictionaries.Add(dic);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
