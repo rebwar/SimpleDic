@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SimpleDic.Models;
 
 namespace SimpleDic.Data
 {
@@ -12,5 +13,6 @@ namespace SimpleDic.Data
             : base(options)
         {
         }
+        public DbSet<Dictionary> dictionaries { get; set; }
     }
 }
