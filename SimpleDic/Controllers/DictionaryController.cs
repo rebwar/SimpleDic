@@ -32,5 +32,36 @@ namespace SimpleDic.Controllers
             _db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult Edit(int id)
+        {
+            var model = _db.dictionaries.Find(id);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Edit(Dictionary dic)
+        {
+            _db.Entry(dic).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
+        }
+        public IActionResult Details(int id)
+        {
+            var model = _db.dictionaries.Find(id);
+            return View(model);
+        }
+        public IActionResult Delete(int id)
+        {
+            var model = _db.dictionaries.Find(id);
+            return View(model);
+
+        }
+        [HttpPost]
+        public IActionResult Delete(Dictionary dictionary)
+        {
+            _db.Entry(dictionary).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

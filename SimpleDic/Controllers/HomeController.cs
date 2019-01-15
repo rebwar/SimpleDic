@@ -4,15 +4,34 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SimpleDic.Data;
 using SimpleDic.Models;
 
 namespace SimpleDic.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ApplicationDbContext _db;
+        public HomeController(ApplicationDbContext db)
         {
-            return View();
+            _db = db;
+        }
+        public IActionResult Index(string term="")
+        {
+            IEnumerable<Dictionary> model;
+            if (string.IsNullOrEmpty(term))
+            {
+                model = null;
+                ViewData["model"] = null;
+            }
+            else
+            {
+                ViewData["model"] = "123";
+                model = _db.dictionaries.Where(b => b.English.Contains(term));
+
+            }
+            ViewData["text"] = term;
+            return View(model);
         }
 
         public IActionResult About()

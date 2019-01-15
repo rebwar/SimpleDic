@@ -1,4 +1,30 @@
-﻿@{
+﻿@model IEnumerable<SimpleDic.Models.Dictionary>
+@{
     ViewData["Title"] = "Home Page";
+}
+<br />
+<br />
+<form method="get" class="form-inline">
+    <input name="term" class="input-lg" value="@ViewData["text"]" />
+    <button type="submit" class="btn-lg btn-primary">Search</button>
+
+</form>
+<hr />
+@if (ViewData["model"] == null)
+{
+
+}
+else
+{
+    @foreach (var dict in Model)
+    {
+        <p>
+            English: <label>@dict.English </label>
+        </p>
+        <p>
+            فارسی:
+            <label>@dict.Farsi </label>
+        </p>
+    }
 }
 
